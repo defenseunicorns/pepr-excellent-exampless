@@ -10,7 +10,6 @@
   },
   "workspaces": [
     "_helpers",
-    "dash-policyreport",
     "hello-pepr",
     "hello-pepr-alias",
     "hello-pepr-config",

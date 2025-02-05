@@ -11,6 +11,7 @@ export function sift(stdout: string[]) {
   const withoutKnownBad = stdout
     .filter(log => !log.includes('] DeprecationWarning: '))
     .filter(log => !log.includes('--trace-deprecation'))
+    .filter(log => !log.includes('ExperimentalWarning: '))
     .filter(log => log)
 
   try {
@@ -27,7 +28,8 @@ export function sift(stdout: string[]) {
   } catch (error) {
     if (
       error.message.includes("Unexpected end of JSON input") ||
-      error.message.includes("Unterminated string in JSON ")
+      error.message.includes("Unterminated string in JSON ") ||
+      error.message.includes("is not valid JSON")
     ) {
       console.error("Unexpected JSON input. Offending lines:")
       const offenders = withoutKnownBad
